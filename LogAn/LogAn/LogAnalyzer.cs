@@ -3,16 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LogAn.Classes;
+using LogAn.Interfaces;
 
 namespace LogAn
 {
     public class LogAnalyzer
     {
+        private IExtensionManager manager;
+
+        public LogAnalyzer(IExtensionManager mgr)
+        {
+            manager = mgr;
+        }
+
         public bool IsValidLogFilename(string fileName)
         {
-            if (!fileName.EndsWith(".SLF", StringComparison.CurrentCultureIgnoreCase))
-                return false;
-            else return true;
+            return manager.IsValid(fileName);
         }
     }
 }

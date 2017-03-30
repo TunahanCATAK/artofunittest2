@@ -4,9 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using LogAn.Interfaces;
 
 namespace LogAn.UnitTests
 {
+    public class AlwaysValidFakeExtensionManager : IExtensionManager
+    {
+        public bool IsValid(string fileName)
+        {
+            return true;
+        }
+    }
+
+
     [TestFixture]
     public class LogAnalyzerTests
     {
@@ -15,7 +25,7 @@ namespace LogAn.UnitTests
         [SetUp]
         public void Setup()
         {
-            m_analyzer = new LogAnalyzer();
+            m_analyzer = new LogAnalyzer(new AlwaysValidFakeExtensionManager());
         }
 
         [Test]
