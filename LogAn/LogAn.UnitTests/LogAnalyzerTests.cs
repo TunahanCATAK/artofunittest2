@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using LogAn.Interfaces;
+using NSubstitute;
 
 namespace LogAn.UnitTests
 {
@@ -52,6 +53,16 @@ namespace LogAn.UnitTests
             log.Analyze(tooShortFileName);
 
             StringAssert.Contains("Filename too short:abc.ext", mockService.lastError);
+        }
+
+        [Test]
+        public void Returns_ByDefault_WorksForHardCodedArgument()
+        {
+            IFileNameRules fakeRules = Substitute.For<IFileNameRules>();
+
+            fakeRules.IsValidLogFileName("strict.txt").Returns(true);
+
+            Assert.IsTrue(fakeRules.IsValidLogFileName("strict.txt"));
         }
     }
 }
