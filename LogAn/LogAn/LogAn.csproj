@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Classes\FileExtensionManager.cs" />
     <Compile Include="Interfaces\IExtensionManager.cs" />
+    <Compile Include="Interfaces\IWebService.cs" />
     <Compile Include="LogAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

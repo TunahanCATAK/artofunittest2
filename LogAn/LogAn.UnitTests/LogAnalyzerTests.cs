@@ -41,5 +41,17 @@ namespace LogAn.UnitTests
             bool result = m_analyzer.IsValidLogFilename("filewithgoodextension.slf");
             Assert.True(result);
         }
+
+        [Test]
+        public void Analyze_TooShortFileName_CallsWebService()
+        {
+            FakeWebService mockService = new FakeWebService();
+            LogAnalyzer log = new LogAnalyzer(mockService);
+            string tooShortFileName = "abc.ext";
+
+            log.Analyze(tooShortFileName);
+
+            StringAssert.Contains("Filename too short:abc.ext", mockService.lastError);
+        }
     }
 }
